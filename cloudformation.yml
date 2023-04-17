@@ -1,0 +1,306 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  emailsendqueue:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "simpleQueue"
+  ApiGateway:
+    Type: "AWS::ApiGateway::RestApi"
+    Properties:
+      Name: "email-api-gateway"
+      EndpointConfiguration:
+        Types:
+          - "REGIONAL"    
+  MailsendResource:
+    Type: "AWS::ApiGateway::Resource"
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ParentId: !GetAtt ApiGateway.RootResourceId
+      PathPart: "mailsend"
+  MailsendMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref MailsendResource
+      HttpMethod: POST
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:sqs:path/simpleQueue"
+        Credentials: "arn:aws:iam::464091903496:role/LabRole"
+        RequestParameters:
+          integration.request.header.Content-Type: "'application/x-www-form-urlencoded'"
+        RequestTemplates:
+          "application/json": "Action=SendMessage&MessageBody=$input.body"
+        PassthroughBehavior: NEVER
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+      - MailsendMethod
+    Properties:
+      RestApiId:
+        Ref: ApiGateway
+      StageName: prod
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: csci5709-911903
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+    DeletionPolicy: Retain
+  S3BUCKETPOLICY:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref MyS3Bucket
+      PolicyDocument:
+        Id: MyPolicy
+        Version: "2012-10-17"
+        Statement: 
+          - Sid: mypolicydoc
+            Action: s3:GetObject
+            Effect: Allow
+            Resource: !Join [ "", [ "arn:aws:s3:::", !Ref MyS3Bucket, "/*" ] ]
+            Principal: "*"
+  LambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Code:
+        S3Bucket: "csci5409-00911903"
+        S3Key: "index.zip"
+      Handler: "index.handler"
+      Runtime: "nodejs18.x"
+      Timeout: 30
+      Role: "arn:aws:iam::464091903496:role/LabRole"
+      Layers:
+        - arn:aws:lambda:us-east-1:464091903496:layer:Nodemailer:1
+  LambdaPermissions:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref LambdaFunction
+      Principal: "sqs.amazonaws.com"
+      SourceArn: !GetAtt emailsendqueue.Arn
+  QueueEventSourceMapping:
+    Type: "AWS::Lambda::EventSourceMapping"
+    Properties:
+      BatchSize: 1
+      Enabled: true
+      EventSourceArn: !GetAtt emailsendqueue.Arn
+      FunctionName: !Ref LambdaFunction
+  MyCustomVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 192.168.0.0/24
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: MyCustomVPC
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyCustomVPC
+      AvailabilityZone: us-east-1a
+      CidrBlock: 192.168.0.0/25
+      Tags:
+        - Key: Name
+          Value: PublicSubnet
+      MapPublicIpOnLaunch: true    
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyCustomVPC
+      AvailabilityZone: us-east-1a
+      CidrBlock: 192.168.0.128/25
+      Tags:
+        - Key: Name
+          Value: PrivateSubnet
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MyCustomVPC
+      Tags:
+        - Key: Name
+          Value: PublicRouteTable
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MyCustomVPC
+      Tags:
+        - Key: Name
+          Value: PrivateRouteTable
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref MyIG
+  PrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref MyIG
+  MyIG:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: MyIG
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref MyCustomVPC
+      InternetGatewayId: !Ref MyIG
+  MyEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc    
+  MyPublicSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet
+  MyPrivateSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnet            
+  BackendInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-007855ac798b5175e
+      InstanceType: t2.micro
+      KeyName: vockey
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds: 
+        - !Ref MySecurityGroup
+      IamInstanceProfile: LabInstanceProfile
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo apt-get update
+          sudo apt-get install nodejs -y
+          sudo apt-get install npm -y
+          sudo apt-get install nginx -y
+          sudo git clone https://github.com/jayramani/Termassignment.git
+          cd Termassignment/backend
+          sudo npm install
+          echo "REACT_APP_API_GATEWAY_URL=https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod" >> /Termassignment/backend/.env
+          sudo npm start
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
+  FrontendInstance:
+    Type: AWS::EC2::Instance
+    DependsOn: BackendInstance
+    Properties:
+      ImageId: ami-007855ac798b5175e
+      InstanceType: t2.micro
+      KeyName: vockey
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds:
+        - !Ref MySecurityGroup
+      IamInstanceProfile: LabInstanceProfile
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo apt-get update
+          sudo apt-get install nodejs -y
+          sudo apt install npm -y
+          sudo git clone "https://github.com/jayramani/Termassignment.git"
+          cd Termassignment
+          cd frontend
+          sudo npm update
+          sudo npm i
+          echo "REACT_APP_URL=http://${BackendInstance.PublicIp}:3030/" >> /Termassignment/frontend/.env
+          sudo npm run build
+          sudo apt-get install nginx -y
+          sudo mkdir -p /var/www/html/
+          sudo cp -r build/* /var/www/html/
+          sudo systemctl restart nginx
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and HTTPS traffic from the internet
+      VpcId: !Ref MyCustomVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: 0.0.0.0/0 
+  MyPrivateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and HTTPS traffic from the internet
+      VpcId: !Ref MyCustomVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0      
+
+
+
+  # EBSApplication:
+  #   Type: AWS::ElasticBeanstalk::Application
+  #   Properties:
+  #     Description: EBS frontend for TStore
+  # EBSApplicationVersion:
+  #   Type: AWS::ElasticBeanstalk::ApplicationVersion
+  #   Properties:
+  #     ApplicationName: !Ref EBSApplication
+  #     Description: EBS Frontend for TStore Version 1.0
+  #     SourceBundle:
+  #       S3Bucket:  "csci5409-00911903"
+  #       S3Key: "backend.zip"
+  # EBSConfigurationTemplate:
+  #   Type: AWS::ElasticBeanstalk::ConfigurationTemplate
+  #   Properties:
+  #     ApplicationName: !Ref EBSApplication
+  #     Description: EBS TStore Template
+  #     OptionSettings:
+  #     - Namespace: aws:elasticbeanstalk:application:environment
+  #       OptionName: "REACT_APP_API_GATEWAY_URL"
+  #       Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod'
+  #     - Namespace: aws:autoscaling:launchconfiguration
+  #       OptionName: EC2KeyName   
+  #       Value: !Ref KeyName
+  #     - Namespace: aws:autoscaling:launchconfiguration
+  #       OptionName: IamInstanceProfile   
+  #       Value: !Ref MyInstanceProfile
+  #     SolutionStackName: 64bit Amazon Linux 2 v5.8.0 running Node.js 16
+  # EBSEnvironment:
+  #   Type: AWS::ElasticBeanstalk::Environment
+  #   Properties:
+  #     ApplicationName: !Ref EBSApplication
+  #     Description: EBS Frontend for TStore Environment
+  #     TemplateName: !Ref EBSConfigurationTemplate
+  #     VersionLabel: !Ref EBSApplicationVersion
+  # MyInstanceProfile:
+  #   Type: AWS::IAM::InstanceProfile
+  #   Properties: 
+  #     Path: "/"
+  #     Roles: ["LabRole"]    

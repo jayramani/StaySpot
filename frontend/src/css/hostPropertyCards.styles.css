@@ -1,0 +1,43 @@
+
+.show-more-less-button{
+background-color: #E5E5E5;
+color: black;
+font-size: 14px;
+border: none;
+border-radius: 5px;
+padding: 4px 18px;
+cursor: pointer;
+}
+
+.host-container{
+    max-width: 900px;
+    box-shadow: 0 1.6rem 2rem -1rem hsla(225, 51%, 44%, 0.33);
+    margin: auto;
+}
+
+ .add-property-button{
+    background-color: #21cf47;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 18px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.update {
+    background-color: #261e1e;
+    color: black;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 18px;
+    cursor: pointer;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

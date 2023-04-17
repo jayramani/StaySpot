@@ -1,0 +1,67 @@
+.logo{
+    font-size: 30px;
+    left: 20px;
+    position: relative;
+    font-weight: 600;
+}
+
+.first-half-logo {
+    font-size: 25px;
+    justify-content: flex-start;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+}
+        
+.second-half-logo {
+    font-size: 25px;
+    font-weight: 500;
+    justify-content: flex-start;
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px;
+                }
+        
+.navbar {
+    width: 100%;
+    align-items: center;
+    background: rgb(21, 128, 235);
+    background: linear-gradient(to bottom right, #141E30, #243B55);
+    
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav-link{
+    display: flex;
+    justify-content: row;
+    gap:20px;
+}
+
+a{
+    color: white !important;
+}
+       
+.menu {
+    right: 0;
+    left: initial;
+    width: 300%;
+    opacity: 1;
+    z-index: 10;
+    font-weight: 400;
+}
+
+.dropdown-item{
+    color: black !important;
+    padding-block: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+}
+
+                

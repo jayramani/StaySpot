@@ -1,0 +1,29 @@
+.details-container{
+    max-width: 900px;
+    box-shadow: 0 1.6rem 2rem -1rem hsla(225, 51%, 44%, 0.33);
+    margin: auto;
+    padding: 30px;
+}
+
+.review-container{
+    margin: auto;
+    width: 700px;
+}
+
+.dates{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.counter{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.inc-btn{
+    width: 20px;
+}
+

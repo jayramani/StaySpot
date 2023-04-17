@@ -1,0 +1,32 @@
+.favourite-page-title {
+    letter-spacing: 0;
+    line-height: normal;
+    min-height: 24px;
+    align-items: center;
+    text-align: center;
+    color: var(--bunting);
+    font-family: var(--font-family-poppins);
+    font-size: 24px;
+    font-weight: 700;
+    font-style: normal;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.favourite-container{
+   
+    max-width: 900px;
+    box-shadow: 0 1.6rem 2rem -1rem hsla(225, 51%, 44%, 0.33);
+    margin: auto;
+
+}
+
+.remove-button{
+    background-color: #c43e3e;
+    color: black;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 18px;
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+.search {
+        background-color:inherit;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        height: 40px;        
+}
+
+.search input::placeholder {
+    font-size: 14px;
+}
