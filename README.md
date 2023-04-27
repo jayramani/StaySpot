@@ -1,4 +1,4 @@
-# StaySpot : A Cloud Focused Project!
+# StaySpot : A Cloud Focused web-application!
 
 ## Author : Jay Ramani
 
