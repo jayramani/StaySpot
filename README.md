@@ -68,15 +68,6 @@ All of the cloud mechanisms work together seamlessly to deliver my application. 
 | `DynamoDB` | To store the property details added by the users  |
 
 
-### **Built With:**
-
-* [React](https://react.dev/)
-* [Node](https://nodejs.org/en/)
-* [Npm](https://www.npmjs.com/)
-* [Express.js](https://reactjs.org/)
-* [MongoDB](https://www.mongodb.com/)
-
-
 ### **Home Page**
 ![Homepage](https://user-images.githubusercontent.com/37774914/234597689-62c2e4f9-6a15-4764-9e3c-00f44d84189e.JPG)
 
