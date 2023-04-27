@@ -4,6 +4,40 @@
 
 ## Getting Started
 
+### **Prerequisites:**
+
+Before using this project, you'll need to have the following installed:
+
+- Node version 18.0 or higher 
+- Mongo version 6.0 or higher
+- A text editor (Visual Studio Code, Atom, Sublime Text, etc.)
+- Git
+- npm version 8.0 or higher
+
+
+### **Installation:**
+
+To install this project, follow these steps:
+
+1. Clone the repository: git clone https://github.com/jayramani/StaySpot.git
+2. Navigate to the backend directory: cd StaySpot/backend
+3. Install the backend dependencies: npm install
+4. Start the server: npm start
+5. Navigate to the frontend directory: cd StaySpot/frontend
+6. Install the frontend dependencies: npm install
+7. Navigate back to the project directory: npm start
+
+### **Environment Variables:**
+
+This project requires the following environment variables to be set:
+
+MONGO_URI=<MONGO_CONNECTION_STRING>
+SECRET=<JWT_SECRET>
+REGION=<AWS_REGION>
+ACCESS_KEY_ID=<AWS_ACCESS_KEY>
+SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+SESSION_TOKEN=<AWS_SESSION_TOKEN><!-- Optional -->
+
 ### **Descripton:**
 
 StaySpot is a web-based platform for booking accommodations, where property owners can list their properties by providing essential details. Users can browse through all the properties listed on the platform, make reservations, cancel reservations, and save properties as favorites.
@@ -36,11 +70,12 @@ All of the cloud mechanisms work together seamlessly to deliver my application. 
 
 ### **Built With:**
 
-* [Express.js](https://reactjs.org/)
+* [React](https://react.dev/)
 * [Node](https://nodejs.org/en/)
-* [npm](https://www.npmjs.com/)
+* [Npm](https://www.npmjs.com/)
+* [Express.js](https://reactjs.org/)
 * [MongoDB](https://www.mongodb.com/)
-* [react](https://react.dev/)
+
 
 ### **Home Page**
 ![Homepage](https://user-images.githubusercontent.com/37774914/234597689-62c2e4f9-6a15-4764-9e3c-00f44d84189e.JPG)
