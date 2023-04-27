@@ -12,8 +12,11 @@ The main objective of this project is to incorporate various AWS services to enh
 
 ### **Application Architecture**
 
+VPC Configuration
 ![WhatsApp Image 2023-04-12 at 21 17 58](https://user-images.githubusercontent.com/37774914/234600771-3d23c633-67a7-4912-bd94-3540571a410f.jpg)
 
+
+API Gateway - SQS - Lambda Configuration for email notification
 ![EmailDia drawio](https://user-images.githubusercontent.com/37774914/234600812-3e0a1689-9e71-4e3b-b243-e85639039812.png)
 
 All of the cloud mechanisms work together seamlessly to deliver my application. The EC2 instances host both the backend and frontend of my application and communicate through the VPC network. I have used S3 to store images of hotels and resorts, and API Gateway to manage and secure my RESTful APIs. Additionally, I have implemented a serverless architecture using Lambda and SQS to automatically send emails to users. Secret Manager is used to securely store my MongoDB URI and API keys. Overall, this combination of cloud mechanisms provides a scalable, flexible, and reliable infrastructure to deliver my application.
