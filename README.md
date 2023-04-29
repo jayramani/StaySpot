@@ -1,8 +1,14 @@
-# StaySpot : A Cloud Focused web-application!
+# StaySpot : AWS integrated web-application!
 
 ## Author : Jay Ramani
 
 ## Getting Started
+
+### **Description:**
+
+StaySpot is a web-based platform for booking accommodations, where property owners can list their properties by providing essential details. Users can browse through all the properties listed on the platform, make reservations, cancel reservations, and save properties as favorites.
+
+The main objective of this project is to incorporate various AWS services to enhance the functionality and performance of StaySpot. By leveraging AWS services, the project aims to improve aspects such as scalability, security, reliability, and user experience, ultimately making StaySpot a robust and efficient platform for property owners and users alike.
 
 ### **Prerequisites:**
 
@@ -38,11 +44,6 @@ This project requires the following environment variables to be set:
 - SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 - SESSION_TOKEN=<AWS_SESSION_TOKEN><!-- Optional -->
 
-### **Descripton:**
-
-StaySpot is a web-based platform for booking accommodations, where property owners can list their properties by providing essential details. Users can browse through all the properties listed on the platform, make reservations, cancel reservations, and save properties as favorites.
-
-The main objective of this project is to incorporate various AWS services to enhance the functionality and performance of StaySpot. By leveraging AWS services, the project aims to improve aspects such as scalability, security, reliability, and user experience, ultimately making StaySpot a robust and efficient platform for property owners and users alike.
 
 ### **Application Architecture**
 
