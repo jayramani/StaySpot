@@ -75,25 +75,6 @@ export default class AirBNBHeader extends React.Component {
     this.props.parentCallback(childData);
   }
   render() {
-    // return (
-    //       <div className="row align-items-center">
-            
-    //         <Navbar Navbar bg="light" variant="light">
-                   
-    //                <Nav className="logo">  
-    //                     <a href ="/"><span>StaySpot</span></a>
-    //                      {/* <a href ="/"> <img style={{height:"100px", width:"200px", marginLeft:"10px", marginRight:"100px"}} src="img/Firstchoice.jpg" alt="Logo"/> </a> */}
-    //                </Nav>                        
-                     
-    //                <SearchBox className="search" parentCallback={(childData) => this.handleCallback(childData)} />             
-    //                <Login/>         
-    //                <div>
-    //                <Logout/>    
-    //                </div>
-       
-    //         </Navbar>
-    //       </div>
-    // );
 
     return (
       <>

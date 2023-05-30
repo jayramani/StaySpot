@@ -44,16 +44,11 @@ function AddNewProperty(){
     };
   
     const handleSubmit = (e) => {
-      //console.log("Inside handleSubmit()");  
   
       e.preventDefault();
       var user = OnSubmit(formValues);
   
-      
-      //console.log("Inside bookAppointment");
     };
-  
-  
   
     useEffect(() => {
       console.log(formErrors);
@@ -62,12 +57,6 @@ function AddNewProperty(){
       }
     }, [formErrors]);
   
-    
-    
-    
-    
-   
-
 
   return (
     <>
@@ -76,10 +65,7 @@ function AddNewProperty(){
     <div className="FormContainer d-flex justify-content-center align-items-center">
       <form className="rounded p-4 p-sm-3" onSubmit={handleSubmit}>
         
-        {/* <div className='LogoContainer'>
-            <img src="img/Firstchoice_Logo.jpg" alt="Logo" className="mx-auto logo_image" onClick= {()=> navigate('/',{replace : true})}/>
-        </div>
-         */}
+       
         <h3 style={{ textAlign: 'center', marginBottom: '10px', marginTop:"23px", textDecoration: 'underline' }}>Log In</h3>
         
         <p style={{fontSize:"25px"}}>{formErrors.Form}</p>
@@ -142,12 +128,6 @@ function AddNewProperty(){
             Submit
         </Button>
 
-
-        {/* <div className='AdminLink'>
-            <p style={{fontSize:"20px",marginTop:"25px", color:"black"}}><b>Don't have an account?</b></p>            
-            <p className='Link' onClick={ goToSignUp } style={{marginTop:"-10px", fontSize:"20px"}}>Sign Up Here</p>
-        </div> */}
-        {/* onClick = {OnSubmit(formValues.email,formValues.password)} */}
       </form>
       </div>
     </div>

@@ -24,10 +24,6 @@ module.exports = (passport) => {
       })
     );
   } catch (e) {
-    // return res.status(500).json({
-    //   status: "Failed",
-    //   error: e.message,
-    // });
     console.log(e);
   }
 };

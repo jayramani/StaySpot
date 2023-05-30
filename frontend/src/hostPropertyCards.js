@@ -160,24 +160,6 @@ const FilterPropertiesTable = (props) => {
   );
 }
 
-// export class SearchBox extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.handleAvailabilityChange = this.handleAvailabilityChange.bind(this);
-//   }
-
-
-//   handleAvailabilityChange(newValue) {
-//     this.props.onAvailabilityChange(newValue.target.checked);
-//   }
-
-//   render() {
-//     return (
-//       <form>
-//       </form>
-//     );
-//   }
-// }
 
 const PropertiesTable = (props) => {
   // const filterValue = props.searchTerm;
@@ -188,12 +170,7 @@ const PropertiesTable = (props) => {
   }
   return (
     <div>
-      {/* <SearchBox
-        filterValue={filterValue}
-        isAvailable={isAvailable}
-        onFilterValueChange={filterValue}
-        onAvailabilityChange={handleAvailabilityChange}
-      /> */}
+      
       <FilterPropertiesTable
         properties={props.properties}
         // filterValue={filterValue}

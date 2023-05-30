@@ -19,15 +19,9 @@ const connectToDb = require("./db/connect");
 
 var app = express();
 connectToDb();
-// view engine setup
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-// app.use(
-//   cors({
-//     origin: "*"
-//   })
-// );
-
 
 app.use(
     cors({

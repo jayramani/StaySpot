@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-// import "./NewLogin.css";
-// import Header from "../Header";
+
 import {Form, Button} from "react-bootstrap";
 import { useNavigate } from 'react-router';
 import Icon from 'react-icons-kit';
-// import Breadcrumb from '../../component/Breadcrumb'
 import { Dropdown} from 'react-bootstrap';
 import {arrows_exclamation} from 'react-icons-kit/linea/arrows_exclamation'
 import {arrows_circle_check} from 'react-icons-kit/linea/arrows_circle_check'
@@ -110,8 +108,7 @@ function NewSignUp(props) {
 
       var data = await response;
       console.log("ssss",response);
-      // console.log(data.emailId);
-      // console.log(data.password);
+
       if(("success"==data.message)){
           navigate('/Login',{replace : true});
       }
@@ -174,10 +171,6 @@ function NewSignUp(props) {
  
     <div className="container">
       <form className="form-container" onSubmit={handleSubmit}>
-        
-        {/* <div className='LogoContainer'>
-            <img src="img/Firstchoice_Logo.jpg" style = {{height:"190px",width:"300px", marginLeft:"120px"}} alt="Logo" className="d-flex align-items-center" onClick= {()=> navigate('/',{replace : true})}/>
-        </div> */}
         
         <h3 style={{ textAlign: 'center', marginBottom: '10px', marginTop:"23px", textDecoration: 'underline' }}>Sign Up</h3>
         
@@ -290,15 +283,6 @@ function NewSignUp(props) {
           </div>
         </main>  
         </div>
-        {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className="form-lable">Birth Date</Form.Label>
-            <Form.Control className='InputLogin' name="birthdate" type="date" placeholder="Enter birthdate"  value={formValues.birthdate} onChange={(e) =>{handleChange(e);}}/>
-        </Form.Group> */}
-
-        {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className="form-lable">Phone Number</Form.Label>
-            <Form.Control className='InputLogin' name="phoneNumber" type="phonenumber" placeholder="Enter phone number" value={formValues.phoneNumber} onChange={(e) =>{handleChange(e);}}/>
-        </Form.Group> */}
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label className="form-lable">User Type</Form.Label>
@@ -314,8 +298,6 @@ function NewSignUp(props) {
         <Button className="signUp-btn" type="submit" onClick={ () => OnSubmit()} >
             Sign Up
         </Button>
-
-        
 
       </form>
       </div>

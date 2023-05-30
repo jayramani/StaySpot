@@ -117,26 +117,6 @@ export const MyReservations = () => {
           
         </thead>
         <FetchReservations/>
-          {/* {
-            props.card.map(t => (
-              <>
-              <tr key = {t.id}>
-                <td>{t.name}</td>
-                <td>{final(String(t.date))}</td>
-                <td>{t.time}</td>
-                
-                <td><Button onClick={() =>{handleShow(t)}}>Edit</Button></td>
-                
-              </tr>
-             
-              </>
-              
-            ))
-            
-          }
-          {show ? <Edit modalAppoitment  = {modalAppoitment} card ={props.card} setCard = {props.setCard} close = {handleClose}/> : null} */}
-  
-
        </Table>
     
     </div>

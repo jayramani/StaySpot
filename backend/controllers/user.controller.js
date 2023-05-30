@@ -62,12 +62,10 @@ controller.login = async (req, res, next) => {
           return false;
         }
         if (result) {
-          // result == true
           let tokenObj = {
             _id: user._id,
             emailId: user.emailId,
           };
-          // token = jwt.sign(tokenObj, SECRET, { expiresIn: "12h" });
           let token = jwt.sign(tokenObj, SECRET);
 
           return res.status(200).json({
@@ -157,7 +155,6 @@ controller.getUserFavourites = async (req, res, next) => {
   try {
     let favourite = await favouriteModel.find({ user_id: req.user._id });
     favourite = favourite ? favourite : [];
-    // let favourite = await favouriteModel.find({});
 
     return res.status(200).json({ message: "success", data: favourite });
   } catch (e) {
@@ -170,14 +167,10 @@ controller.getUserFavourites = async (req, res, next) => {
 controller.getDetailedFavourites = async (req, res, next) => {
   console.log(req.user);
   try {
-    // console.log("requesttttt.bodyyyy===",req.user);
     let favourite = await favouriteModel
-      // .find({})
       .find({ user_id: req.user._id })
       .populate(["user_id", "property_id"])
       .exec();
-    // favourite = favourite ? favourite : [];
-    console.log("===================From Backend=====================");
     console.log(favourite);
     return res.status(200).json({ message: "success", data: favourite });
   } catch (e) {

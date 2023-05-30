@@ -17,13 +17,9 @@ function Login() {
   };
 
   const handleSubmit = (e) => {
-    //console.log("Inside handleSubmit()");  
 
     e.preventDefault();
     setFormErrors(validate(formValues));
-
-    
-    //console.log("Inside bookAppointment");
   };
 
 
@@ -51,8 +47,7 @@ function Login() {
 
     var data = await response;
     console.log("ssss",response);
-    // console.log(data.emailId);
-    // console.log(data.password);
+
     if((email==data.emailId)){
       localStorage.setItem("authToken", `Bearer ${data.token}`);
         localStorage.setItem("userType",data.userType);

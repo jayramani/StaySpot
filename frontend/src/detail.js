@@ -164,19 +164,7 @@ function Property(){
                 <img src={property.S3Image} className="w-100"
                 />
             </div>
-            {/* <div className="col-lg-5">
-                <div className="row mt-3 mt-lg-0">
-                    <div className="col-6 img-left">
-                        <img src={url} alt=".." className="w-100 h-100"/>
-                    </div>
-                    <div className="col-6 img-left">
-                        <img src={process.env.BUCKET_LOCATION+"15.jfif"} className="w-100 h-100"/>
-                    </div>
-                    <div className="col-12 img-left mt-3">
-                        <img src={"./img/" + property.imageName} className="w-100 h-100"/>
-                    </div>
-                </div>
-            </div> */}
+         
         </div>
           {/* Description Section */}
         <div className="bottom-wrap my-5">
@@ -258,38 +246,10 @@ function Property(){
                     <h4>Existing Reviews</h4>
                     <GetReviews values = {property._id}/>   
 
-                     <h4>Give a Review</h4>          
-                      
-                  {/* <form onSubmit={handleSubmit}> 
-                    <Form.Group controlId="formBasicEmail">
-                      {/* <Form.Label style={{ marginTop:"15px", fontSize:"20px"}}>First Name</Form.Label> */}
-                      {/* <Form.Control style={{width:"75%", height:"100px"}} className='InputLogin' type="text" placeholder="Write Your Reviews..." />
-                    </Form.Group>
-                                 
-                    <Form.Group  controlId="formBasicEmail">
-            
-                      <Form.Label style={{ marginTop:"15px", fontSize:"20px"}}>Rate This Property</Form.Label>
-                        <Form.Select style={{width:"75%"}}>
-                          <option>Select rating out of 5</option>
-                          <option value="1">1 Highly Dissatisfied</option>
-                          <option value="2">2 Disstatisfied</option>
-                          <option value="3">3 Neutral</option>
-                          <option value="4">4 Satisfied</option>
-                          <option value="5">5 Highly Satisfied</option>
-                        </Form.Select>       
-                    </Form.Group>                    
-              
-                
-
-                  <Button style={{backgroundColor:"#15BAEB",width:"100px", height:"40px",fontSize:"20px" }} type="submit" >
-                      Submit
-                  </Button>
-
-
-                  </form> */}
-<form>
+                     <h4>Give a Review</h4>              
+        <form>
     
-<Form.Group controlId="formBasicEmail">
+          <Form.Group controlId="formBasicEmail">
                       <Form.Label style={{ marginTop:"15px", fontSize:"20px"}}>First Name</Form.Label>
                        <Form.Control name = "feedback" style={{width:"75%", height:"100px"}} className='InputLogin' type="text" placeholder="Write Your Reviews..." onChange={(e) =>{handleChange(e);}} />
                     </Form.Group>
@@ -312,37 +272,11 @@ function Property(){
                   <Button style={{backgroundColor:"#15BAEB",width:"100px", height:"40px",fontSize:"20px", marginTop:"50px"}}  onClick={() => addReview(formValues)}>
                       Submit
                   </Button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    
-
-  </form>
-
-
-
-                
-
-              </div>
-              </div>
-              
-                              
-          </div>
-
-
-
-{/* <div style={{marginTop:"100px"}}>
-
-          {this.props.hideDetail && (
-            <button
-              type="button"
-              onClick={() => {
-                this.props.setHideButtonDetails(false);
-                this.props.setShowButtonDetails(true);
-              }}
-            >
-              Back
-            </button>
-          )}
-          </div> */}
         </div>
       </div>
     </section>

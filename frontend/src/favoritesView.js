@@ -136,10 +136,7 @@ const FilterPropertiesTable = (props) => {
   var cnt = 0;
   console.log(props);
   props.properties.forEach((property) => {
-      // if ((props.isAvailable && !property.isAvailable) || ((property.title.toLowerCase().indexOf(props.filterValue) === -1) && (property.location.toLowerCase().indexOf(props.filterValue) === -1) && (property.title.indexOf(props.filterValue) === -1) && (property.location.indexOf(props.filterValue) === -1))) {
-      //   return;
-      // }
-      
+     
       cnt += 1;
       console.log(cnt);
   
@@ -157,26 +154,6 @@ const FilterPropertiesTable = (props) => {
     </div>
   );
 }
-
-// export class SearchBox extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.handleAvailabilityChange = this.handleAvailabilityChange.bind(this);
-//   }
-
-
-//   handleAvailabilityChange(newValue) {
-//     this.props.onAvailabilityChange(newValue.target.checked);
-//   }
-
-//   render() {
-//     return (
-//       <form>
-//       </form>
-//     );
-//   }
-// }
-
 const FavoritesTable = (props) => {
   // const filterValue = props.searchTerm;
   const [isAvailable, setIsAvailable] = useState(false);
@@ -186,15 +163,9 @@ const FavoritesTable = (props) => {
   }
   return (
     <div>
-      {/* <SearchBox
-        filterValue={filterValue}
-        isAvailable={isAvailable}
-        onFilterValueChange={filterValue}
-        onAvailabilityChange={handleAvailabilityChange}
-      /> */}
+      
       <FilterPropertiesTable
         properties={props.favorites}
-        // filterValue={filterValue}
         isAvailable={isAvailable}
       />
     </div>

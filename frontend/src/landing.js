@@ -6,10 +6,6 @@ import {Routes, Route, useNavigate, Link} from 'react-router-dom';
 import Favorites  from "./favoritesView.js";
 
 
-
-// const Reload = () => {
-//     window.location.reload(false);
-// }
 export default class LandingPage extends React.Component {
     state = {
         searchTerm: "",

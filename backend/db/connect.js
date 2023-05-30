@@ -10,7 +10,6 @@ const connectToDb = async () => {
   try {
 
     const secrets = await getSecrets();
-    // console.log(secrets);
     await mongoose.connect(secrets.MONGO_URI);
     console.log("Connected to mongo!!!");
     return 1;

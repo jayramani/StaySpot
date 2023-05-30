@@ -56,21 +56,7 @@ function AddNewProperty(){
     };
 
     addProduct();
-    // const response = fetch(url, {
-    //   method: 'POST',
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: JSON.stringify({		"title": values.title,
-    //                             "location": values.location,
-    //                             "isAvailable": true,
-    //                             "description":values.description,
-    //                             "cleaningfee": values.cleaningfee,
-    //                             "servicefee": values.servicefee,
-    //                             "amenities": values.description,
-    //                             "bedrooms": values.bedrooms,
-    //                             "pricepernight": values.pricepernight,
-    //                             "imageName": values.imageName})
-
-    // });
+ 
     navigate('/Host',{replace : true});
   }
 
@@ -153,12 +139,6 @@ function AddNewProperty(){
             <Form.Control className='InputLogin' name="bedrooms" type="text" placeholder="Enter Bedrooms"  value={formValues.bedrooms} onChange={handleChange}/>
         </Form.Group>
         <p>{formErrors.email}</p>
-
-        {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label style={{ marginTop:"15px", fontSize:"20px"}}>Image Name: </Form.Label>
-            <Form.Control className='InputLogin' name="imageName" type="text" placeholder="Enter Image Name"  value={formValues.imageName} onChange={handleChange}/>
-        </Form.Group>
-        <p>{formErrors.password}</p> */}
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label style={{ marginTop:"15px", fontSize:"20px"}}>Image Name: </Form.Label>

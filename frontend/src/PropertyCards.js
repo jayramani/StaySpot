@@ -17,7 +17,6 @@ var CarouselComponent = (props) => {
     setIsHovering(false);
   };
   var c = 1;
-  // "./img/" + c * Number(props.property.imageName.substring(0,1)) + ".jfif"
   return (
     <div id={"carouselExampleIndicators" + props.count} className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner" interval="0">
@@ -26,7 +25,6 @@ var CarouselComponent = (props) => {
 
           <img src={props.property.S3Image} className=" d-block w-100 rounded-lg" alt="..." />
 
-          {/* <img src={"./img/" + c * Number(props.property.imageName.substring(0,1)) + ".jfif"} className=" d-block w-100 rounded-lg" alt="..." /> */}
           <div onMouseEnter={handleMouseOver}
             onMouseLeave={handleMouseOut} className={c += 1} ></div>
           <a href="#"><i className={isHovering ? 'fa fa-heart hearts nex' : 'fa fa-heart-o hearts nex'} /></a>
@@ -35,7 +33,6 @@ var CarouselComponent = (props) => {
         <div className="carousel-item card-img-wrapper">
           <img src={props.property.S3Image} className=" d-block w-100 rounded-lg" alt="..." />
 
-          {/* <img src={"./img/" + c * Number(props.property.imageName.substring(0,1)) + ".jfif"} className="d-block w-100 rounded-lg" alt="..." /> */}
           <div onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut} className={c += 1} ></div>
 
@@ -45,7 +42,6 @@ var CarouselComponent = (props) => {
         <div className="carousel-item card-img-wrapper">
           <img src={props.property.S3Image} className=" d-block w-100 rounded-lg" alt="..." />
 
-          {/* <img src={"./img/" + c * Number(props.property.imageName.substring(0,1)) + ".jfif"} className="d-block w-100 rounded-lg" alt="..." /> */}
           <div onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut} className={c += 1} ></div>
 
@@ -70,7 +66,6 @@ const PropertyRow = (props) => {
 
   const [showDetail, setShowButtonDetails] = useState(true);
   const [hideDetail, setHideButtonDetails] = useState(false);
-  // const [propertyId, setPropertyId] = useState("");
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseOver = () => {
@@ -130,7 +125,6 @@ const PropertyRow = (props) => {
         <div className="property-name">
 
           <div className="property-location">{props.property.location}</div>
-          {/* <Unavailable props = {props.property.isAvailable}/> */}
           <div className="rating d-flex align-items-center">
 
             <button type="button" className="favourite-button" onClick={() => { props.isFavorite ? removeFromFavoritesList(props.property._id) : addToFavoritesList(props.property._id) }}><i onMouseEnter={handleMouseOver}
@@ -144,12 +138,10 @@ const PropertyRow = (props) => {
 
 
         <Link to="/Detail" state={props.property}><h6 className="location fw-normal text-black-50 text-capitalize">{props.property.title}</h6></Link>
-        {/* <h6 className="date fw-normal text-black-50 text-capitalize">{props.property.shortdescription}</h6> */}
         <div className="price"><span>${props.property.pricepernight}</span> /night</div>
 
 
         {showDetail && <button type="button" className="show-more-less-button" onClick={() => { setShowButtonDetails(false); setHideButtonDetails(true) }}>See more</button>}
-        {/* <button type="button" className="btn btn-primary-outline" onClick={() => { addToFavoritesList(props.property._id); }}>Favorite</button> */}
         {!showDetail &&
           <>
             <p><strong>Cleaning Fees</strong>: {props.property.cleaningfee}</p>
@@ -168,24 +160,6 @@ const PropertyRow = (props) => {
   );
 }
 
-
-// async function getImage(imageName) {
-
-//   console.log(process.env.REACT_APP_URL);
-//   const url = process.env.REACT_APP_URL + "property/image/" + "house.jpeg";
-//   console.log(url);
-//   const response = await fetch(url, {
-//     method: 'GET',
-//     headers: {'Content-Type': "multipart/form-data"}
-//     })
-//     .catch(err => console.error(err));
-//   var data = await response;
-//   console.log("ssss",response);
-//   let srcValue = response.url;
-//   console.log(srcValue);
-//   return srcValue;
-// }
-
 const FilterPropertiesTable = (props) => {
   var isFavorite = false;
   const propertyList = [];
@@ -195,14 +169,13 @@ const FilterPropertiesTable = (props) => {
     if (((property.title.toLowerCase().indexOf(props.filterValue) === -1) && (property.location.toLowerCase().indexOf(props.filterValue) === -1) && (property.title.indexOf(props.filterValue) === -1) && (property.location.indexOf(props.filterValue) === -1))) {
       return;
     }
-    // var imageName = getImage(property.imageName);
+   
     cnt += 1;
     console.log(cnt);
    
-    // var response = getFavoritesList();
+   
     props.favorites.forEach((response) => {
-      // console.log(JSON.stringify(response.property_id));
-      // console.log(JSON.stringify(property._id));
+   
       if (response.property_id == property._id) {
         isFavorite = true;
         storeFavorite = response._id;
@@ -255,8 +228,7 @@ const PropertiesTable = (props) => {
   const [isAvailable, setIsAvailable] = useState(false);
   const [favorites, setFavorites] = useState([]);
   useEffect(() => {
-    // const url = "http://localhost:3081/favorites";
-    // const url = "http://localhost:3081/favorites";
+   
     const url = process.env.REACT_APP_URL + "user/favourite";
 
     fetch(url, {
