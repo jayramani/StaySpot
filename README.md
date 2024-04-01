@@ -1,8 +1,17 @@
-# StaySpot : AWS integrated web-application!
+# StaySpot: AWS integrated web application!
 
-## Author : Jay Ramani
+## Author: Jay Ramani
 
 ## Getting Started
+
+### **Application Architecture**
+
+VPC Configuration with API Gateway - SQS - Lambda Configuration for email notification
+
+![WhatsApp Image 2024-03-29 at 4 29 33 PM](https://github.com/jayramani/StaySpot/assets/37774914/2dbc1f49-898f-41f6-a85b-b051951baf34)
+
+
+All of the cloud mechanisms work together seamlessly to deliver my application. The EC2 instances host both the backend and frontend of my application and communicate through the VPC network. I have used S3 to store images of hotels and resorts, and API Gateway to manage and secure my RESTful APIs. Additionally, I have implemented a serverless architecture using Lambda and SQS to automatically send emails to users. Secret Manager is used to securely store my MongoDB URI and API keys. Overall, this combination of cloud mechanisms provides a scalable, flexible, and reliable infrastructure to deliver my application.
 
 ### **Description:**
 
@@ -45,14 +54,6 @@ This project requires the following environment variables to be set:
 - SESSION_TOKEN=<AWS_SESSION_TOKEN><!-- Optional -->
 
 
-### **Application Architecture**
-
-VPC Configuration with API Gateway - SQS - Lambda Configuration for email notification
-
-![WhatsApp Image 2024-03-29 at 4 29 33 PM](https://github.com/jayramani/StaySpot/assets/37774914/2dbc1f49-898f-41f6-a85b-b051951baf34)
-
-
-All of the cloud mechanisms work together seamlessly to deliver my application. The EC2 instances host both the backend and frontend of my application and communicate through the VPC network. I have used S3 to store images of hotels and resorts, and API Gateway to manage and secure my RESTful APIs. Additionally, I have implemented a serverless architecture using Lambda and SQS to automatically send emails to users. Secret Manager is used to securely store my MongoDB URI and API keys. Overall, this combination of cloud mechanisms provides a scalable, flexible, and reliable infrastructure to deliver my application.
 ### **AWS Services Used**
 
 | Service | Purpose |
